@@ -5,22 +5,33 @@ body{
 .container{
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(180deg, #52B2AF 0%, #52B2AF 0.01%, #003333 100%);
-
+    background: linear-gradient(180deg, #E2CBD0 0%, #BEA5AA 100%);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
+    font: black;
+    font-size: large;
 }
 
-.logo{
-    width: 50%;
-    text-align: center;
+
+.flowers>img{
+    width: 43vw;
+    height: 100vh;
+    margin:0;
 }
 
 .loginContainer{
-    width: 50%;
+    width: 60%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.loginPhoto>img{
+    padding: 2em;
+    height: 13vh;
 }
 
 form{
@@ -28,30 +39,38 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    height: 50vh;
-
-    background: #FFE3F2;
+    width: 40vw;
+    height: 48vh;
+    background: #7DA297;;
     border-radius: 40px;
+    padding: 1.5em;
 }
 
 button{
     line-height: 3em;
     background: #0B5453;
     border-radius: 30px;
-    width: 50%;
+    width: 28vw;
+    height: 6vh;
     border: none;
-    color: white;
+    background: #BEA5AA;
     margin: 1em;
+    font-family: 'Jacques Francois';
+}
+
+#forgotYourPsswd, #signIn{
+    background: transparent;
 }
 
 input{
-    background: white;
+    background: #E2CBD0;
     border-radius: 30px;
-    width: 50%;
+    width: 28vw;
+    height: 6vh;
     margin: 1em;
     border: none;
     line-height: 3em;
+    font-family: 'Jacques Francois';
 }
 
 label{
@@ -61,24 +80,41 @@ label{
     text-align: left;
 }
 
+
 @media only screen and (max-device-width: 420px) {
     .container{
         flex-direction: column;
+        overflow: auto;
+    }
+
+    .flowers>img{
+        width: 100%;
     }
 
     *{
         font-size: 36px;
     }
 
-    .loginContainer, .logo{
+    .loginContainer, .loginPhoto, .flowers{
         width: 100%;
+    }
+
+    .loginPhoto>img{
+        width: 100vw;
+        padding: 0;
+    
     }
 
     form{
         margin:auto;
+        width: 65vw;
     }
 
     img{
         height: 10em;
+    }
+
+    button, input{
+        width: 50vw;
     }
 }
