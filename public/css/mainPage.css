@@ -1,6 +1,6 @@
 .containerMain{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .menuBar{
@@ -13,7 +13,8 @@
 }
 
 #logo{
-    margin: 2em 0em;
+    margin: 0em;
+    height: 8vh;
 }
 
 .menuBar>img{
@@ -23,9 +24,11 @@
 }
 
 main{
-    width: 83vw;
+    height: 90 vh;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    overflow: auto;
 }
 
 .pasek{
@@ -33,9 +36,11 @@ main{
     background: linear-gradient(180deg, #B2D9CD 0%, #7DA297 100%);
     display: flex;
     flex-direction: row;
+    /*justify-content: center;
+    align-items: center;*/
 }
 
-.account{
+.account, .menuIcon{
     width: 10vw;
     display: flex;
     flex-direction: column;
@@ -43,13 +48,17 @@ main{
     align-items: center;
 }
 
-#Account{
+i{
     font-size: 2em;
 }
 
-.menuIcon, .emptySpace{
-    width: 36.5vw;
+.logo{
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 li i {
     font-size: 1em;
@@ -58,6 +67,7 @@ li i {
 .siter{
     background: linear-gradient(180deg, #E2CBD0 0%, #BEA5AA 100%);
     height: 90vh;
+    width: 100%;
     overflow: auto;
 }
 
@@ -69,7 +79,7 @@ ul {
     height: 100%;
     width: calc(100% - 40px);
     position: relative;
-    margin: 0 auto;
+    margin: 2em auto;
     padding: 0;
 }
 
@@ -85,4 +95,38 @@ a{
     text-decoration: none;
     display: inline-block;
     line-height: 2em;
+}
+
+@media only screen and (max-device-width: 420px){
+   
+
+
+    .menuBar{
+        width: 260vw;
+        height: 90vh;
+    }
+
+    .siter{
+        overflow: auto;
+    }
+
+    #logo{
+        height: 6vh;
+    }
+
+    i{
+        font-size: 1.5em;
+    }
+    li i{
+        font-size: 1.5em;
+    }
+
+    .menuBar>img{
+        width: 100%;;
+    }
+
+    ul{
+        margin: 4em auto;
+    }
+
 }
