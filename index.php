@@ -1,8 +1,13 @@
 <?php
 
-$zmienna="tekst";
-echo "<h2>Przykładowy \n $zmienna!</h2>";
-echo "To ", "jest ", "przykładowy ", "$zmienna. \n"; print "Jeszcze jeden $zmienna\n";
-echo print "Jeszcze jeden $zmienna\n";
+require 'Routing.php';
+
+$path = trim($_SERVER['REQUEST_URI'], '/');
+$path = parse_url( $path, PHP_URL_PATH);
+
+Router::get('', 'DefaultController');
+Router::get('login', 'DefaultController');
+
+Router::run($path);
 
 ?>
