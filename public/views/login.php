@@ -12,11 +12,20 @@
             <div class = "loginPhoto">
                 <img src = "public/img/logo.svg">
             </div>
-            <form>
+            <form action = "login" method = "POST">
+            <div class="messages">
+                    <?php
+                        if(isset($messages)){
+                            foreach($messages as $message) {
+                                echo $message;
+                            }
+                        }
+                    ?>
+                </div>
                 Log in
                 <input name = "email" type="text" placeholder="   e-mail">
                 <input name = "password" type="password" placeholder="   password">
-                <button>Log in</button>
+                <button type = "submit" >Log in</button>
                 <button id = "forgotYourPsswd">Forgot your password?</button>
             </form>
             <button id = "signIn">Don't have an account? Sign in.</button>
