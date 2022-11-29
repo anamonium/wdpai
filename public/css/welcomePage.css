@@ -155,3 +155,73 @@ p{
 .endSection>button{
     margin: 1em 0em 3em 0em;
 }
+
+
+@media only screen and (max-device-width: 420px){
+    .icons{
+        display: flex;
+        flex-direction: column;
+        padding: 2em;
+        overflow: auto;
+    }
+
+    .icons>div {
+        margin: 2em 3em 0em 3em;
+        font-size: 1.8em;
+    }
+
+    .header{
+        justify-content: left;
+    }
+
+    .mainPicture {
+        height: 90vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .info {
+        width: 60vw;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 4em;
+        margin: 1em 0em 0em 0em;
+        text-align: center;
+    }
+
+    #longNapis {
+        font-size: 2em;
+        margin: 2em 0em 3em 0em;
+    }
+
+    .pictures {
+        width: 100vw;
+    }
+
+    #rectangle {
+        width: 55vw;
+        height: 50vh;
+    }
+
+    #dots {
+        width: 61vw;
+        height: 50vh;
+        grid-column: 3 / -1;
+    }
+
+    #fls {
+        width: 60vw;
+        height: 50vh;
+        grid-column: 2 / span 8;
+    }
+
+    #setOfTools {
+        font-size: 3.5em;
+        margin: 3em 0em 1em 0em;
+    }
+
+
+}

@@ -46,6 +46,10 @@ form{
     padding: 1.5em;
 }
 
+#signinForm{
+    height: 58vh;
+}
+
 button{
     line-height: 3em;
     background: #0B5453;
@@ -71,6 +75,7 @@ input{
     border: none;
     line-height: 3em;
     font-family: 'Jacques Francois';
+    text-align: center;
 }
 
 label{

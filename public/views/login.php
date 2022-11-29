@@ -23,8 +23,8 @@
                     ?>
                 </div>
                 Log in
-                <input name = "email" type="text" placeholder="   e-mail">
-                <input name = "password" type="password" placeholder="   password">
+                <input name = "email" type="text" placeholder="e-mail">
+                <input name = "password" type="password" placeholder="password">
                 <button type = "submit" >Log in</button>
                 <button id = "forgotYourPsswd">Forgot your password?</button>
             </form>

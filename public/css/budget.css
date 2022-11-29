@@ -1,0 +1,50 @@
+.budgetInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+
+.budgetCosts{
+    background: linear-gradient(180deg, #B2D9CD 0%, rgba(178, 217, 205, 0.5) 0.01%, rgba(125, 162, 151, 0.7) 100%);
+    border-radius: 20px 20px 20px 20px;
+    width: 90%;
+    height: 100%;
+    overflow: auto;
+    display: grid;
+    justify-content: left;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    width: 100%;
+}
+
+ul{
+    height: auto;
+}
+
+.budgetCategory, .itemsBudget{
+    margin: 1.5em 2em 1.5em 0em;
+    width: auto;
+}
+
+.budgetCategory{
+    font-size: 1.6em;
+}
+
+.itemsBudget{
+    margin: 1em 0em 0em 3em;
+}
+
+#listElem{
+    background: transparent;
+    font-size: inherit;
+    line-height: normal;
+    width: auto;
+    height: auto;
+    margin: auto;
+}

@@ -8,7 +8,6 @@
     background: linear-gradient(179.99deg, #B2D9CD 24.81%, #7DA297 99.99%);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -69,6 +68,7 @@ li i {
     height: 90vh;
     width: 100%;
     overflow: auto;
+    align-items: center;
 }
 
 ul {
