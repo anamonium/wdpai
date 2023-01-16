@@ -3,8 +3,9 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/mainPage.css">
+    <link rel="stylesheet" type="text/css" href="public/css/budget.css">
     <script src="https://kit.fontawesome.com/299209977e.js" crossorigin="anonymous"></script>
-    <title>Main page</title>
+    <title>budget page</title>
 </head>
 <body>
     <div class = "containerMain">
@@ -48,8 +49,28 @@
             </nav>
             
             <div class = "siter">
+                <div class = "budgetInfo">
+                   <h1>Budget manager</h1>
+                    <h2>Budget left: 364784.09 $</h2>
+                </div>
                 <section >
-                    
+                    <div class = "budget">
+                        <?php foreach ($budget as $item): ?>
+                            <div class = "budgetItem">
+                                <div class="name"><?= $item->getName(); ?></div>
+                                <div class="cost"><?= $item->getCost(); ?></div>
+                                <div class="delete"><i class="fas fa-pen"></i><i class="fas fa-trash"></i></div>
+                            </div>
+
+                        <?php endforeach; ?>
+
+                        <div class = "addBudgetItem">
+                            <input id = "bnInput" name = "budgetItemName" type="text" placeholder="Cost name">
+                            <input id = "bcInput" name = "budgetItemCost" type="text" placeholder="Cost price">
+                            <button id = "baInput" type = "submit">Add cost</button>
+                        </div>
+
+                    </div>
                 </section>
             </div>
         </main>

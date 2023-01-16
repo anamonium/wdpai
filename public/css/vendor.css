@@ -1,0 +1,44 @@
+.vendor{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.vendorInf{
+    background: #7DA297;
+    padding: 1em;
+    margin-top: 2em;
+    border-radius: 10px;
+    padding-bottom: 2em;
+}
+
+.name{
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.category{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.description{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 1em;
+}
+
+.addressContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2em;
+}
+
+section{
+    justify-content: center;
+    display: flex;
+}

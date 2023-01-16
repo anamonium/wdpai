@@ -15,4 +15,5 @@ class DefaultController extends AppController{
     public function welcomePage(){
         $this->render('welcomePage');
     }
+
 }

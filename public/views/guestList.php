@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/mainPage.css">
-    <link rel="stylesheet" type="text/css" href="../css/guestList.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/mainPage.css">
+    <link rel="stylesheet" type="text/css" href="public/css/guestList.css">
     <script src="https://kit.fontawesome.com/299209977e.js" crossorigin="anonymous"></script>
-    <title>Main page</title>
+    <title>guest list</title>
 </head>
 <body>
     <div class = "containerMain">
@@ -14,7 +14,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class = "logo">
-                <img id = "logo" src = "../img/logo.svg">
+                <img id = "logo" src = "public/img/logo.svg">
             </div>
             <div class = "account">
                 <a href = "a class = button"><i class="fas fa-user"></i></a>
@@ -22,27 +22,27 @@
         </div>
         <main>
             <nav class = "menuBar">
-                <img id = "flowers" src = "../img/images/login-flowers-kopia.png">
+                <img id = "flowers" src = "public/img/images/login-flowers-kopia.png">
                 <ul>
                     <li>
                         <i class="fas fa-magnifying-glass"></i>
-                        <a href="a" class = "button">Overview</a>
+                        <a href="overview" class = "button">Overview</a>
                     </li>
                     <li>
                         <i class="fas fa-sack-dollar"></i>
-                        <a href="a" class = "button">Budget</a>
+                        <a href="budget" class = "button">Budget</a>
                     </li>
                     <li>
                         <i class="fas fa-users"></i>
-                        <a href="a" class = "button">Guestlist</a>
+                        <a href="guestList" class = "button">Guestlist</a>
                     </li>
                     <li>
                         <i class="fas fa-list-check"></i>
-                        <a href="a" class = "button">Checklist</a>
+                        <a href="checklist" class = "button">Checklist</a>
                     </li>
                     <li>
                         <i class="fas fa-church"></i>
-                        <a href="a" class = "button">Vendors</a>
+                        <a href="vendor" class = "button">Vendors</a>
                     </li>
                 </ul>
     
@@ -66,11 +66,12 @@
                                 <th>Name</th>
                                 <th>Plus one</th>
                                 <th>Status</th>
-                                <th>Comment</th>
+                                <th>Phone</th>
                             </thead>
                             <tbody>
+                            <?php foreach($guestList as $guest): ?>
                             <tr>
-                                <td>Mary Jones</td>
+                                <td><?=$guest->getName()." ".$guest->getSurname(); ?></td>
                                <td><i class="fa-light fa-square"></i></td>
                                 <td><select name = "status">
                                     <option>Declined</option>
@@ -78,21 +79,11 @@
                                     <option>Confirmed</option>
                                     <option>Invitation to be send</option>
                                 </select></td>
-                                <td>Comment</td>
+                                <td><?= $guest->getPhone();?></td>
 
                             </tr>
-                            <tr>
-                                <td>Mary Jones</td>
-                               <td><i class="fa-light fa-square"></i></td>
-                                <td><select name = "status">
-                                    <option>Declined</option>
-                                    <option>Invited</option>
-                                    <option>Confirmed</option>
-                                    <option>Invitation to be send</option>
-                                </select></td>
-                                <td>Comment</td>
 
-                            </tr>
+                            <?php endforeach; ?>
                             </tbody>
                             </table>
                     </div>

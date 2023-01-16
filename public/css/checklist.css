@@ -1,0 +1,64 @@
+.checklist{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.task{
+    display: flex;
+    background: #7DA297;
+    width: 80%;
+    border-radius: 10px;
+    align-items: center;
+    padding: 1em 1em 1em 1em;
+    margin-top: 1.5em;
+}
+
+.checkSquare{
+    font-size: 0.75em;
+    width: 5%;
+    margin-left: 1.2em;
+}
+
+.taskContent{
+    font-size: 1.25em;
+    width: 85%;
+}
+
+.deleteTask{
+    font-size: 0.5em;
+    justify-content: space-around;
+    display: flex;
+    width: 8%;
+}
+
+#tcInput{
+    width: 55vw;
+    background: #B2D9CD;
+    border-radius: 10px;
+}
+
+#taInput{
+    width: 10vw;
+    background: #7DA297;
+    border-radius: 10px;
+}
+
+.addTask{
+    display: flex;
+    margin-top: 3em;
+}
+
+.addTa{
+    display: flex;
+    flex-direction: inherit;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    background: inherit;
+    border-radius: inherit;
+    padding: inherit;
+}

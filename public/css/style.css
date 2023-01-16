@@ -41,7 +41,7 @@ form{
     align-items: center;
     width: 40vw;
     height: 48vh;
-    background: #7DA297;;
+    background: #7DA297;
     border-radius: 40px;
     padding: 1.5em;
 }
@@ -52,7 +52,6 @@ form{
 
 button{
     line-height: 3em;
-    background: #0B5453;
     border-radius: 30px;
     width: 28vw;
     height: 6vh;
@@ -83,6 +82,13 @@ label{
     border: none;
     width: 50%;
     text-align: left;
+}
+
+.no-valid{
+    border: 3px solid red;
+    border-radius: 1em;
+    box-shadow: 0 0 0.2em red;
+    outline: none;
 }
 
 
