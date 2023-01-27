@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/vendor.css">
     <script src="https://kit.fontawesome.com/299209977e.js" crossorigin="anonymous"></script>
     <script type = "text/javascript" src = "/public/js/vendor.js" defer></script>
+    <script type = "text/javascript" src = "/public/js/vendorAdmin.js" defer></script>
     <script type = "text/javascript" src = "/public/js/nav.js" defer></script>
     <title>vendors</title>
 </head>
@@ -52,13 +53,35 @@
             
             <div class = "siter">
                 <section >
+                    <div class = "search">
+                        <div class = "serarchName">
 
+                        </div>
+                        <div class = "searchState">
+
+                        </div>
+                        <div class = "searchCity">
+
+                        </div>
+                        <div class = "searchCategory">
+
+                        </div>
+                    </div>
                     <div class = "vendor">
+
+                        <div class = "addVendor">
+                            <input id = "newVendorName" name = "taskContent" type="text" placeholder="Vendor's name">
+                            <input id = "newVendorCat" name = "taskContent" type="text" placeholder="Vendor's category">
+                            <input id = "newVendorDesc" name = "taskContent" type="text" placeholder="Vendor's description">
+                            <button id = "addNewVendor" type = "submit">Add vendor</button>
+                        </div>
+
                         <?php foreach ($vendor as $ven):  ?>
-                        <div class = "vendorInf" id = "<?=$ven->getId(); ?>" >
+                        <div class = "vendorInf" id = "<?= $ven->getId(); ?>">
                             <div class = "name"><?= $ven->getName(); ?></div>
                             <div class = "category"><?= $ven->getCategory(); ?></div>
                             <div class = "description"><?= $ven->getDescription(); ?></div>
+                            <i class = "fas fa-plus"></i>
                         </div>
                         <?php endforeach; ?>
 
@@ -88,5 +111,20 @@
             <div class = "phone"></div>
             <div class = "email"></div>
         </div>
+    </div>
+</template>
+
+<template id = "addAddress">
+    <div class = "addAdd">
+    <input id = "newVendorPhone" name = "taskContent" type="text" placeholder="Vendor's phone">
+    <input id = "newVendorEmail" name = "taskContent" type="text" placeholder="Vendor's email">
+    <input id = "newVendorStreet" name = "taskContent" type="text" placeholder="Vendor's street">
+
+    <input id = "newVendorBuNo" name = "taskContent" type="text" placeholder="Vendor's building nb">
+    <input id = "newVendorPoCo" name = "taskContent" type="text" placeholder="Vendor's postal code">
+    <input id = "newVendorCity" name = "taskContent" type="text" placeholder="Vendor's city">
+    <input id = "newVendorState" name = "taskContent" type="text" placeholder="Vendor's state">
+    <input id = "newVendorCountry" name = "taskContent" type="text" placeholder="Vendor's country">
+    <button id = "addNewAddress" type = "submit">Add vendor address</button>
     </div>
 </template>

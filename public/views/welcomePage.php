@@ -11,8 +11,8 @@
             <img src = "public/img/logo.svg">
         </div>
         <div class = "buttons">
-            <button id = "signIn">Sign in</button>
-            <button id = "logIn">Log in</button>
+            <a href = "sign"><button id = "signIn">Sign in</button></a>
+            <a href = "login"><button id = "logIn">Log in</button></a>
         </div>
     </div>
     <div class = "mainPicture">
@@ -90,6 +90,6 @@
         <h2>Join us now!</h2>
         <h3>No hidden costs.
             Everything is for free!</h3>
-        <button id = "logIn">Sign in</button>
+        <a href = "sign"><button id = "logIn">Sign in</button></a>
     </div>
 </body>

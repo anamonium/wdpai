@@ -6,38 +6,15 @@ require_once __DIR__.'/../models/Vendor.php';
 
 class VendorRepository extends Repository
 {
-    public function getAddress($id_address){
+
+    public function getVendorAddresses($id_vendor): array
+    {
         $stmt = $this->database->connect()->prepare('
-            SELECT a.*, s.name as state, c.name as country from public."address" a join  public."state" s 
-            ON a.id_state = s.id_state join public."country" c on c.id_country = s.id_country
-            WHERE a.id_address = :id_address 
-        ');
-
-        $stmt->bindParam(':id_address', $id_address, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $address = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if(!$address)
-            return null;
-
-        return new Address(
-            $address['street'],
-            $address['building_number'],
-            $address['postal_code'],
-            $address['city'],
-            $address['state'],
-            $address['country']
-        );
-    }
-
-    //zwraca tab adresow
-    public function getVendorAddresses($id_vendor){
-
-        $result = [];
-
-        $stmt = $this->database->connect()->prepare('
-            SELECT * from public."vendors_addresses" where id_vendor = :id_vendor
+            select email, phone, street, building_number, postal_code, city, s.name as state, c.name as country from "vendors_addresses"
+                join address a on vendors_addresses.id_address = a.id_address
+                join state s on a.id_state = s.id_state
+                join country c on s.id_country = c.id_country
+            where vendors_addresses.id_vendor = :id_vendor;
         ');
 
         $stmt->bindParam(':id_vendor', $id_vendor, PDO::PARAM_INT);
@@ -45,36 +22,12 @@ class VendorRepository extends Repository
 
         $addresses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($addresses as $address){
-            $result[] = new VendorAddress(
-                $address['email'],
-                $address['phone'],
-                $this->getAddress($address['id_address'])
-            );
-        }
-
-        return $result;
-
+        return $addresses;
 
     }
 
-    public function getCategory($id_category){
-        $stmt = $this->database->connect()->prepare('
-            SELECT * from public."vendor_category" where id_vendor_category = :id_category
-        ');
-
-        $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $category = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if(!$category)
-            return null;
-
-        return $category['name'];
-    }
-
-    public function getVendors(){
+    public function getVendors(): array
+    {
         $result = [];
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM public."vendors"
@@ -88,12 +41,133 @@ class VendorRepository extends Repository
             $result[] = new Vendor(
                 $vendor['name'],
                 $vendor['description'],
-                $this->getCategory($vendor['id_vendor_category']),
-                $this->getVendorAddresses($vendor['id_vendor'])
+                $vendor['vendor_category'],
+                $vendor['id_vendor']
             );
         }
 
         return $result;
 
     }
+
+    public function checkRole(): ?int
+    {
+        $user_id = $_COOKIE['logged_user'];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * from public."admins" where id_user = :id;
+        ');
+
+        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($user["role"] === 2)
+            return 1;
+        else
+            return 0;
+    }
+
+    public function addCountry($country){
+        $checkIfExists = $this->database->connect()->prepare(
+            'Select * from public."country" where name = :name;'
+        );
+        $checkIfExists->bindParam(':name', $country, PDO::PARAM_STR);
+        $checkIfExists->execute();
+        $countryGet= $checkIfExists->fetch(PDO::FETCH_ASSOC);
+
+        if($countryGet)
+            return $countryGet['id_country'];
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public."country" (name)
+            VALUES (?) RETURNING id_country
+        ');
+
+        $stmt->execute([
+            $country
+        ]);
+
+        $countryGet = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $countryGet['id_country'];
+    }
+
+    public function addState($id_country, $state){
+
+        $checkIfExists = $this->database->connect()->prepare(
+            'Select * from public."country" where name = :name and id_country = :id;'
+        );
+        $checkIfExists->bindParam(':name', $state, PDO::PARAM_STR);
+        $checkIfExists->bindParam(':id', $id_country, PDO::PARAM_INT);
+        $checkIfExists->execute();
+        $stateGet= $checkIfExists->fetch(PDO::FETCH_ASSOC);
+
+        if($stateGet)
+            return $stateGet['id_state'];
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public."state" (id_country, name)
+            VALUES (?,?) RETURNING id_state
+        ');
+
+        $stmt->execute([
+            $id_country,
+            $state
+        ]);
+
+        $stateGet =  $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stateGet['id_state'];
+    }
+
+    public function addVendorAddress($id_state, $street, $buildNo, $postalCode, $city){
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public."address" (id_state, street, building_number, postal_code, city)
+            VALUES (?,?,?,?,?) RETURNING id_address
+        ');
+
+        $stmt->execute([
+            $id_state,
+            $street,
+            $buildNo,
+            $postalCode,
+            $city
+        ]);
+
+        $address = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $address['id_address'];
+    }
+
+    public function addVendor($vendorCat, $name, $description){
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public."vendors" (vendor_category, name, description)
+            VALUES (?,?,?) RETURNING id_vendor
+        ');
+
+        $stmt->execute([
+            $vendorCat,
+            $name,
+            $description
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function addVendorsAddress($id_vendor, $id_address, $email, $phone){
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public."vendors_addresses" (id_vendor, id_address, email, phone)
+            VALUES (?,?,?, ?) 
+        ');
+
+        $stmt->execute([
+            $id_vendor,
+            $id_address,
+            $email,
+            $phone
+        ]);
+
+    }
+
 }

@@ -25,26 +25,34 @@ class GuestListRepository extends Repository{
             $guest['surname'],
             $guest['phone'],
             $guest['plus_one'],
-            $guest['status']
+            $guest['status'],
+            $guest['id_guest']
         );
     }
 
-    public function addGuest(GuestList $guest){
+    public function addGuest($name, $surname, $phone)
+    {
         $stmt = $this->database->connect()->prepare('
             INSERT INTO public."guests" (id_guestlist, name, surname, phone, plus_one, status)
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?) RETURNING id_guest, name, surname, phone
         ');
 
         $user_id = $_COOKIE['logged_user'];
 
         $stmt->execute([
             $user_id,
-            $guest->getName(),
-            $guest->getSurname(),
-            $guest->getPhone(),
-            $guest->getPlusOne(),
-            $guest->getStatus()
+            $name,
+            $surname,
+            $phone,
+            0,
+            0
         ]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['id_guest'];
+//        return new GuestList($result['name'], $result['surname'], $result['phone'],false , false,$result['id_guest']);
+
     }
 
     public function getGuests(): array{
@@ -68,12 +76,91 @@ class GuestListRepository extends Repository{
                 $guest['surname'],
                 $guest['phone'],
                 $guest['plus_one'],
-                $guest['status']
+                $guest['status'],
+                $guest['id_guest']
             );
         }
 
         return $result;
     }
 
+    public function updatePlusOne(int $id){
+        $guest = $this->getGuest($id);
+
+
+        if($guest){
+            if($guest->getPlusOne()){
+                $stmt = $this->database->connect()->prepare("
+                    UPDATE public.guests SET plus_one = false where id_guest = :id;
+                ");
+            }
+            else{
+                $stmt = $this->database->connect()->prepare("
+                    UPDATE public.guests SET plus_one = true where id_guest = :id;
+                ");
+            }
+
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+
+    public function updateStatus(int $id){
+
+        $guest = $this->getGuest($id);
+
+        if ($guest){
+            if($guest->getStatus()){
+                $stmt = $this->database->connect()->prepare("
+                    UPDATE public.guests SET status = false where id_guest = :id;
+                ");
+            }
+            else{
+                $stmt = $this->database->connect()->prepare("
+                    UPDATE public.guests SET status = true where id_guest = :id;
+                ");
+            }
+
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+
+    public function getGuestListCount(): ?array
+    {
+        $user_id = $_COOKIE['logged_user'];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * from public."guest_list" where id_guest_list = :id;
+        ');
+
+        $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if(!$result){
+            return null;
+        }
+
+        $info = [];
+        $info[0] = $result['invited'];
+        $info[1] = $result['accepted'];
+
+        return $info;
+    }
+
+    public function deleteGuest($id){
+        $guest = $this->getGuest($id);
+
+        if($guest){
+            $stmt = $this->database->connect()->prepare("
+                DELETE from public.guests where id_guest = :id
+            ");
+
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
 
 }

@@ -16,7 +16,7 @@
                 <img id = "logo" src = "public/img/logo.svg">
             </div>
             <div class = "account">
-                <a href = "a class = button"><i class="fas fa-user"></i></a>
+                <a href = "account"><i class="fas fa-user"></i></a>
             </div>
         </div>
         <main>

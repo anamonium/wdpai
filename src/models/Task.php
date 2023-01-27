@@ -4,12 +4,14 @@ class Task
 {
     private $status;
     private $content;
+    private $id;
 
 
-    public function __construct($content, $status)
+    public function __construct($content, $status = false, $id = null)
     {
         $this->content = $content;
         $this->status = $status;
+        $this->id = $id;
     }
 
     public function getStatus()
@@ -30,6 +32,16 @@ class Task
     public function setContent($content): void
     {
         $this->content = $content;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
 

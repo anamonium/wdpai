@@ -5,11 +5,11 @@
 }
 
 .vendorInf{
-    background: #7DA297;
-    padding: 1em;
+    background: linear-gradient(180deg, #B2D9CD 0%, rgba(178, 217, 205, 0.5) 0.01%, rgba(125, 162, 151, 0.7) 100%);
     margin-top: 2em;
     border-radius: 10px;
-    padding-bottom: 2em;
+    padding: 1em 1em 2em;
+    box-shadow: dimgray 3px 3px;
 }
 
 .name{
@@ -41,4 +41,61 @@
 section{
     justify-content: center;
     display: flex;
+}
+
+#addNewVendor, #newVendorStreet, #newVendorBuNo, #newVendorPoCo, #newVendorCity,#newVendorState, #newVendorCountry{
+    width: 17em;
+    justify-self: center;
+}
+
+#newVendorDesc{
+    width: 50em;
+}
+
+.addVendor>input{
+    background: #B2D9CD;
+    border-radius: 10px;
+    box-shadow: dimgray 3px 3px;
+}
+
+.addVendor>button{
+    background: #7DA297;
+    border-radius: 10px;
+    box-shadow: dimgray 3px 3px;
+}
+
+.addVendor{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#newVendorName, #newVendorCat, #newVendorPhone, #newVendorEmail{
+    justify-self: center;
+}
+
+#newVendorDesc, #addNewVendor{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
+}
+
+@media only screen and (max-device-width: 420px) {
+    main {
+        flex-direction: column;
+    }
+
+    .menuBar {
+        width: 100vw;
+    }
+
+    .addVendor{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #newVendorDesc{
+        width: 96%;
+    }
 }

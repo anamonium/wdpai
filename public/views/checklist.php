@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="/public/css/mainPage.css">
     <link rel="stylesheet" type="text/css" href="/public/css/checklist.css">
     <script src="https://kit.fontawesome.com/299209977e.js" crossorigin="anonymous"></script>
+    <script type = "text/javascript" src = "/public/js/checklist.js" defer></script>
+    <script type = "text/javascript" src = "/public/js/nav.js" defer></script>
     <title>budget page</title>
 </head>
 <body>
@@ -17,7 +19,7 @@
                 <img id = "logo" src = "/public/img/logo.svg">
             </div>
             <div class = "account">
-                <a href = "a class = button"><i class="fas fa-user"></i></a>
+                <a href = "account"><i class="fas fa-user"></i></a>
             </div>
         </div>
         <main>
@@ -50,29 +52,48 @@
             
             <div class = "siter">
                 <div class = "checklistInfo">
-                   <h1>Checklist</h1>
+
+                   <h1>Checklists</h1>
+                    <span>This is the place when you can store all your tasks and mark them as completed.</span>
+                    <div class = "overview">
+                        <div>
+                            <div id = "all">All tasks: </div>
+                            <h2 id = "allTasks"> <?= $checklistInfo[1]?> </h2>
+                        </div>
+                        <div>
+                            <div id = "completed">Tasks completed: </div>
+                                <h2 id = "tasksCompleted"> <?= $checklistInfo[0] ?></h2>
+                        </div>
+                    </div>
+
                 </div>
                 <section >
                     <div class = "checklist">
+                        <div class = "chCon">
                         <?php foreach ($checklist as $item): ?>
-                            <div class = "task">
+                            <div class = "task" id = "<?=$item->getId(); ?>">
                                 <div class = "checkSquare">
-                                    <i class="fa-light fa-square"></i>
+                                    <?php if(!$item->getStatus()):?>
+                                        <i class="fas fa-square"></i>
+                                    <?php endif;?>
+                                    <?php if($item->getStatus()):?>
+                                        <i class="fas fa-square-check"></i>
+                                    <?php endif;?>
                                 </div>
                                 <div class = "taskContent">
                                     <?=$item->getContent(); ?>
                                 </div>
                                 <div class="deleteTask">
-                                    <i class="fas fa-pen"></i><i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash"></i>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-
+                        </div>
                         <div class = "addTask">
-                            <form class="addTa" action = "addTask" method="POST">
+
                             <input id = "tcInput" name = "taskContent" type="text" placeholder="Task content">
                             <button id = "taInput" type = "submit">Add task</button>
-                            </form>
+
                         </div>
                     </div>
                 </section>
@@ -80,3 +101,16 @@
         </main>
     </div>
 </body>
+
+<template id = "task-template">
+    <div class = "task" id = "">
+        <div class = "checkSquare">
+                <i id = "status" class=""></i>
+        </div>
+        <div class = "taskContent">
+        </div>
+        <div class="deleteTask">
+            <i class="fas fa-trash"></i>
+        </div>
+    </div>
+</template>

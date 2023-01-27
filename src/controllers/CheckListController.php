@@ -14,17 +14,42 @@ class CheckListController extends AppController
     }
 
     public function checklist(){
-        $checklist = $this->checklistrepository->getTasks();
-        $this->render('checklist', ['checklist' => $checklist]);
+        if($_COOKIE['logged_user']) {
+            $checklist = $this->checklistrepository->getTasks();
+            $checklistInfo = $this->checklistrepository->getTaskCount();
+            $this->render('checklist', ['checklist' => $checklist, 'checklistInfo' => $checklistInfo]);
+        }else{
+            $this->render('welcomePage');
+        }
+    }
+
+    public function updateTaskStatus(int $id){
+        $this->checklistrepository->updateTaskStatus($id);
+        http_response_code(200);
+    }
+
+    public function deleteTask(int $id){
+        $this->checklistrepository->deleteTask($id);
+        http_response_code(200);
     }
 
     public function addTask(){
-        $content = $_POST['taskContent'];
-        $status = false;
 
-        $task = new Task($content, $status);
-        $this->checklistrepository->addTask($task);
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-        return $this->render('checklist');
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+            $result = $this->checklistrepository->addTask($decoded);
+            echo json_encode($result);
+            //echo json_encode($this->checklistrepository->addTask($decoded));
+        }
+
+
+
     }
 }

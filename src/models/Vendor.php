@@ -2,19 +2,29 @@
 
 class Vendor
 {
+    private $id;
     private $name;
     private $description;
     private $category;
-    private $addresses; //array
 
-
-    public function __construct($name, $description, $category, $addresses)
+    public function __construct($name, $description, $category, $id)
     {
         $this->name = $name;
         $this->description = $description;
         $this->category = $category;
-        $this->addresses = $addresses;
+        $this->id = $id;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
 
     public function getName()
     {
@@ -44,16 +54,6 @@ class Vendor
     public function setCategory($category): void
     {
         $this->category = $category;
-    }
-
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    public function setAddresses($addresses): void
-    {
-        $this->addresses = $addresses;
     }
 
 

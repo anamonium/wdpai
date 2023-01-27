@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font-family: monospace;
 }
 
 .container{
@@ -58,7 +59,7 @@ button{
     border: none;
     background: #BEA5AA;
     margin: 1em;
-    font-family: 'Jacques Francois';
+    /*font-family: 'Jacques Francois';*/
 }
 
 #forgotYourPsswd, #signIn{
@@ -73,7 +74,7 @@ input{
     margin: 1em;
     border: none;
     line-height: 3em;
-    font-family: 'Jacques Francois';
+    /*font-family: 'Jacques Francois';*/
     text-align: center;
 }
 
@@ -112,7 +113,7 @@ label{
     }
 
     .loginPhoto>img{
-        width: 100vw;
+        width: 100%;
         padding: 0;
     
     }
@@ -124,6 +125,7 @@ label{
 
     img{
         height: 10em;
+        width: 100%;
     }
 
     button, input{

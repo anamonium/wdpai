@@ -6,6 +6,7 @@ require_once 'src/controllers/GuestListController.php';
 require_once 'src/controllers/CheckListController.php';
 require_once 'src/controllers/BudgetController.php';
 require_once 'src/controllers/VendorController.php';
+require_once 'src/controllers/WeddingDetailsContoller.php';
 
 class Router{
 
@@ -22,7 +23,9 @@ class Router{
 
       //allows us to run a url controller
     public static function run ($url) {
-        $action = explode("/", $url)[0];
+
+        $urlParts = explode("/", $url);
+        $action = $urlParts[0];
 
         //check if an element exists in routes array
         if (!array_key_exists($action, self::$routes)) {
@@ -31,8 +34,10 @@ class Router{
     
         $controller = self::$routes[$action];
         $object = new $controller;
-        $action = $action ?: 'login';
-    
-        $object->$action();
+        $action = $action ?: 'welcomePage';
+
+        $id = $urlParts[1];
+
+        $object->$action($id);
     }
 }

@@ -11,7 +11,7 @@
         </div>
         <div class = "loginContainer">
             <div class = "loginPhoto">
-                <img src = "public/img/logo.svg">
+               <a href = "welcomePage"> <img src = "public/img/logo.svg"></a>
             </div>
             <div class="login-container">
                 <form id = "signinForm" action = "sign" method = "POST">
@@ -33,7 +33,7 @@
                     <button type = "submit" >Sign in</button>
                 </form>
             </div>
-            <button id = "signIn">Already have an account? Log in.</button>
+            <a href = "login"><button id = "signIn">Already have an account? Log in.</button></a>
         </div>
     </div>
 </body>

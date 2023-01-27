@@ -91,7 +91,7 @@ li {
 
 a{
     color: black;
-    font-family: 'Jacques Francois';
+    /*font-family: 'Jacques Francois';*/
     text-decoration: none;
     display: inline-block;
     line-height: 2em;

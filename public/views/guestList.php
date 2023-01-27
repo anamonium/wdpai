@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="public/css/mainPage.css">
     <link rel="stylesheet" type="text/css" href="public/css/guestList.css">
     <script src="https://kit.fontawesome.com/299209977e.js" crossorigin="anonymous"></script>
+    <script type = "text/javascript" src = "/public/js/guestlist.js" defer></script>
+    <script type = "text/javascript" src = "/public/js/nav.js" defer></script>
     <title>guest list</title>
 </head>
 <body>
@@ -17,7 +19,7 @@
                 <img id = "logo" src = "public/img/logo.svg">
             </div>
             <div class = "account">
-                <a href = "a class = button"><i class="fas fa-user"></i></a>
+                <a href = "account"><i class="fas fa-user"></i></a>
             </div>
         </div>
         <main>
@@ -50,36 +52,51 @@
             
             <div class = "siter">
                 <h1>Guest list</h1>
+                <span>Here you can store the information about your guests.</span>
                 <div class = "guestListInfo">
-                    <div>Invited: 132</div>
-                    <div>Confirmed: 67</div>
-                    <div>Declined: 29</div>
-                    <div>Awaiting: 36</div>
+                    <div >
+                        <div id = "invited">Invited: </div>
+                        <h2 id = "invInf"><?= $guestListInfo[0]?></h2>
+                    </div>
+
+                    <div>
+                        <div id = "confirmed">Confirmed:</div>
+                        <h2 id = "confInf"> <?= $guestListInfo[1]?></h2>
+                    </div>
                 </div>
                 <section >
-                    <div class = "addGuest">
-                        <button><i class="fas fa-circle-plus"></i>  Add guest</button>
-                    </div>
+
                     <div class = "guestList">
                         <table>
                             <thead>
-                                <th>Name</th>
-                                <th>Plus one</th>
-                                <th>Status</th>
-                                <th>Phone</th>
+                                <th class = "gName">Name</th>
+                                <th class = "gPlusOne">Plus one</th>
+                                <th class = "gStatus">Status</th>
+                                <th class = "gPhone">Phone</th>
+                                <th class = "removeGuest"></th>
                             </thead>
                             <tbody>
                             <?php foreach($guestList as $guest): ?>
-                            <tr>
-                                <td><?=$guest->getName()." ".$guest->getSurname(); ?></td>
-                               <td><i class="fa-light fa-square"></i></td>
-                                <td><select name = "status">
-                                    <option>Declined</option>
-                                    <option>Invited</option>
-                                    <option>Confirmed</option>
-                                    <option>Invitation to be send</option>
-                                </select></td>
-                                <td><?= $guest->getPhone();?></td>
+                            <tr id = "<?=$guest->getId(); ?>" >
+                                <td class = "gName"><?=$guest->getName()." ".$guest->getSurname(); ?></td>
+                                <td class = "gPlusOne">
+                                    <?php if(!$guest->getPlusOne()):?>
+                                        <i class="fas fa-square"></i>
+                                    <?php endif;?>
+                                    <?php if($guest->getPlusOne()):?>
+                                        <i class="fas fa-square-check"></i>
+                                    <?php endif;?>
+                                </td>
+                                <td class = "gStatus">
+                                    <?php if(!$guest->getStatus()):?>
+                                        <i class="fas fa-square"></i>
+                                    <?php endif;?>
+                                    <?php if($guest->getStatus()):?>
+                                        <i class="fas fa-square-check"></i>
+                                    <?php endif;?>
+                                </td>
+                                <td class = "gPhone"><?= $guest->getPhone();?></td>
+                                <td class = "removeGuest"><i class="fas fa-trash"></i></td>
 
                             </tr>
 
@@ -87,8 +104,30 @@
                             </tbody>
                             </table>
                     </div>
+
+                    <div class = "addGuest">
+                        <input id = "guestName" name = "guestNameContent" type="text" placeholder="Guest's name">
+                        <input id = "guestSurname" name = "guestSurnameContent" type="text" placeholder="Guest's surname">
+                        <input id = "guestPhone" name = "guestPhoneContent" type="text" placeholder="Guest's phone">
+                        <button id = "addGuest" type = "submit">Add guest</button>
+
+                    </div>
                 </section>
             </div>
         </main>
     </div>
 </body>
+
+<template id = "newGuest">
+    <tr id = "" >
+        <td class = "gName"></td>
+        <td class = "gPlusOne">
+            <i class="fas fa-square"></i>
+        </td>
+        <td class = "gStatus">
+            <i class="fas fa-square"></i>
+        </td>
+        <td class = "gPhone"></td>
+        <td class = "removeGuest"><i class="fas fa-trash"></i></td>
+    </tr>
+</template>

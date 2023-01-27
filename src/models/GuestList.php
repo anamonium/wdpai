@@ -7,14 +7,16 @@ class GuestList{
     private $phone;
     private $plus_one;
     private $status;
+    private $id;
 
-    public function __construct($name, $surname, $phone, $plus_one, $status)
+    public function __construct($name, $surname, $phone, $plus_one = false, $status = false, $id = null)
     {
         $this->name = $name;
         $this->surname = $surname;
         $this->phone = $phone;
         $this->plus_one = $plus_one;
         $this->status = $status;
+        $this->id = $id;
     }
 
     public function getName()
@@ -66,5 +68,17 @@ class GuestList{
     {
         $this->status = $status;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+
 
 }

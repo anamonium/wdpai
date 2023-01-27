@@ -10,7 +10,7 @@
         </div>
         <div class = "loginContainer">
             <div class = "loginPhoto">
-                <img src = "public/img/logo.svg">
+                <a href = "welcomePage"><img src = "public/img/logo.svg"></a>
             </div>
             <form action = "login" method = "POST">
             <div class="messages">
@@ -26,9 +26,8 @@
                 <input name = "email" type="text" placeholder="e-mail">
                 <input name = "password" type="password" placeholder="password">
                 <button type = "submit" >Log in</button>
-                <button id = "forgotYourPsswd">Forgot your password?</button>
             </form>
-            <button id = "signIn">Don't have an account? Sign in.</button>
+            <a href = "sign"><button id = "signIn">Don't have an account? Sign in.</button></a>
         </div>
     </div>
 </body>
