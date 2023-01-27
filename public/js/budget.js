@@ -26,21 +26,23 @@ function addCostItem() {
     let priceInput = costPriceInput.value;
     const valPIn = parseFloat(priceInput);
 
-    fetch("/addBudgetItem", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"name": budgetNameCost, "cost": valPIn})
-    }).then(function (response) {
-        return response.json();
-    }).then(function (budget){
-        budgetLeft.innerHTML = parseFloat(budgetLeft.innerHTML) - valPIn;
-        createBudget(budget, budgetNameCost, valPIn);
-        costPriceInput.value= "";
-        costNameInput.value="";
-    });
+    if(budgetNameCost && valPIn) {
 
+        fetch("/addBudgetItem", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"name": budgetNameCost, "cost": valPIn})
+        }).then(function (response) {
+            return response.json();
+        }).then(function (budget) {
+            budgetLeft.innerHTML = parseFloat(budgetLeft.innerHTML) - valPIn;
+            createBudget(budget, budgetNameCost, valPIn);
+            costPriceInput.value = "";
+            costNameInput.value = "";
+        });
+    }
 }
 
 

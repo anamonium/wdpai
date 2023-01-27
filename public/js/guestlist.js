@@ -83,21 +83,24 @@ function addGuest() {
     const surname = addGuestSurname.value;
 
 
-    fetch("/addGuest", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"name": name, "surname": surname, "phone": phone})
-    }).then(function (response) {
-        return response.json();
-    }).then(function (Guest){
-        createGuest(Guest, name + " " + surname, phone);
-        invitedInfo.innerHTML = parseInt(invitedInfo.innerHTML) + 1;
-        addGuestName.value = "";
-        addGuestPhone.value = "";
-        addGuestSurname.value = "";
-    });
+    if(name && phone  && surname ) {
+
+        fetch("/addGuest", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"name": name, "surname": surname, "phone": phone})
+        }).then(function (response) {
+            return response.json();
+        }).then(function (Guest) {
+            createGuest(Guest, name + " " + surname, phone);
+            invitedInfo.innerHTML = parseInt(invitedInfo.innerHTML) + 1;
+            addGuestName.value = "";
+            addGuestPhone.value = "";
+            addGuestSurname.value = "";
+        });
+    }
 
 }
 

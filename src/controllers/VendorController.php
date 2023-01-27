@@ -52,8 +52,7 @@ class VendorController extends AppController
             $decoded = json_decode($content, true);
             $countryId=$this->vendorRepository->addCountry($decoded['country']);
             $stateId = $this->vendorRepository->addState($countryId, $decoded['state']);
-            $addressId = $this->vendorRepository->addVendorAddress($stateId, $decoded['street'], $decoded['bNo'], $decoded['posCo'], $decoded['city']);
-            $this->vendorRepository->addVendorsAddress($id, $addressId, $decoded['email'], $decoded['phone']);
+            $this->vendorRepository->addVendorAddress($id,$decoded['phone'], $decoded['email'], $stateId, $decoded['street'], $decoded['bNo'], $decoded['posCo'], $decoded['city']);
             header('Content-type: application/json');
             http_response_code(200);
         }

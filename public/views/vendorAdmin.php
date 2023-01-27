@@ -97,6 +97,7 @@
         <div class = "name"></div>
         <div class = "category"></div>
         <div class = "description"></div>
+        <i class = "fas fa-plus"></i>
     </div>
 </template>
 

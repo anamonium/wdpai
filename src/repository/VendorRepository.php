@@ -1,7 +1,6 @@
 <?php
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Address.php';
-require_once __DIR__.'/../models/VendorAddress.php';
 require_once __DIR__.'/../models/Vendor.php';
 
 class VendorRepository extends Repository
@@ -122,7 +121,7 @@ class VendorRepository extends Repository
         return $stateGet['id_state'];
     }
 
-    public function addVendorAddress($id_state, $street, $buildNo, $postalCode, $city){
+    public function addVendorAddress($id,$phone, $email, $id_state, $street, $buildNo, $postalCode, $city){
         $stmt = $this->database->connect()->prepare('
             INSERT INTO public."address" (id_state, street, building_number, postal_code, city)
             VALUES (?,?,?,?,?) RETURNING id_address
@@ -137,7 +136,19 @@ class VendorRepository extends Repository
         ]);
 
         $address = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $address['id_address'];
+        $add =  $address['id_address'];
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public."vendors_addresses" (id_vendor, id_address, email, phone)
+            VALUES (?,?,?,?);
+        ');
+
+        $stmt->execute([
+            $id,
+            $add,
+            $email,
+            $phone
+        ]);
     }
 
     public function addVendor($vendorCat, $name, $description){
@@ -155,19 +166,5 @@ class VendorRepository extends Repository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function addVendorsAddress($id_vendor, $id_address, $email, $phone){
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO public."vendors_addresses" (id_vendor, id_address, email, phone)
-            VALUES (?,?,?, ?) 
-        ');
-
-        $stmt->execute([
-            $id_vendor,
-            $id_address,
-            $email,
-            $phone
-        ]);
-
-    }
 
 }

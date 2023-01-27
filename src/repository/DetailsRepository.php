@@ -1,7 +1,6 @@
 <?php
 require_once "Repository.php";
 require_once __DIR__.'/../models/WeddingDetails.php';
-require_once __DIR__.'/../models/UsersVendor.php';
 
 class DetailsRepository extends Repository
 {
@@ -16,17 +15,6 @@ class DetailsRepository extends Repository
             join guest_list gl on wedding_details.id_wedding_details = gl.id_guest_list
             where wedding_details.id_wedding_details = :id;
         ');
-
-//        $stmt = $this->database->connect()->prepare('
-//            SELECT "wedding_details".wedding_date, "budget".beggining_budget,
-//                   "budget".budget_letf, "checklist".subtask_done,
-//                   "checklist".all_subtask, "guest_list".invited, "guest_list".accepted
-//            FROM public."wedding_details", public."budget", public."checklist",
-//                 public."guest_list"
-//            WHERE
-//                "wedding_details".id_wedding_details = :id AND "budget".id_budget = :id AND
-//                "checklist".id_checklist = :id AND "guest_list".id_guest_list = :id
-//        ');
 
         $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
         $stmt->execute();

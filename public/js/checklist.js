@@ -14,19 +14,22 @@ function addTask(){
 
     const description = addTaskInput.value;
 
-    fetch("/addTask", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(description)
-    }).then(function (response) {
-        return response.json();
-    }).then(function (Task){
-        createTask(Task, description);
-        allTasksNumber.innerHTML = parseInt(allTasksNumber.innerHTML) + 1;
-        addTaskInput.value = "";
-    });
+    if(description) {
+
+        fetch("/addTask", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(description)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (Task) {
+            createTask(Task, description);
+            allTasksNumber.innerHTML = parseInt(allTasksNumber.innerHTML) + 1;
+            addTaskInput.value = "";
+        });
+    }
 
 }
 

@@ -46,7 +46,6 @@ class CheckListController extends AppController
             http_response_code(200);
             $result = $this->checklistrepository->addTask($decoded);
             echo json_encode($result);
-            //echo json_encode($this->checklistrepository->addTask($decoded));
         }
 
 

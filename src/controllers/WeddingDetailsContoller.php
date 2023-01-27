@@ -2,7 +2,6 @@
 require_once "AppController.php";
 require_once __DIR__.'/../models/WeddingDetails.php';
 require_once __DIR__.'/../models/User.php';
-require_once __DIR__.'/../models/UsersVendor.php';
 require_once __DIR__.'/../repository/DetailsRepository.php';
 
 

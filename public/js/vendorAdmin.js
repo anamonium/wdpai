@@ -14,20 +14,23 @@ function addVendor() {
     const category = categoryInput.value;
     const desc = descriptionInput.value;
 
-    fetch("/addVendor", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"name": name,"category": category,"description": desc})
-    }).then(function (response) {
-        return response.json();
-    }).then(function (id){
-        createNewVendor(id['id_vendor'], name, category, desc);
-        nameInput.value = "";
-        categoryInput.value = "";
-        descriptionInput.value = "";
-    });
+    if(name && category && desc) {
+
+        fetch("/addVendor", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"name": name, "category": category, "description": desc})
+        }).then(function (response) {
+            return response.json();
+        }).then(function (id) {
+            createNewVendor(id['id_vendor'], name, category, desc);
+            nameInput.value = "";
+            categoryInput.value = "";
+            descriptionInput.value = "";
+        });
+    }
 }
 
 function createNewVendor(id,vName, vCategory, vDescription){
@@ -45,6 +48,9 @@ function createNewVendor(id,vName, vCategory, vDescription){
 
     const description = clone.querySelector(".description");
     description.innerHTML = vDescription;
+
+    clone.querySelector(".fa-plus").addEventListener("click", addAddres);
+    itm.addEventListener("click", showVendor);
 
     vendorContainer.appendChild(clone);
 }
@@ -64,28 +70,32 @@ function sendAddress() {
     const container = this;
     const cont = container.parentElement;
     const id = cont.getAttribute('id')
-    const street = cont.querySelector("#newVendorStreet");
-    const builNo = cont.querySelector("#newVendorBuNo");
-    const posCo = cont.querySelector("#newVendorPoCo");
-    const city = cont.querySelector("#newVendorCity");
-    const state = cont.querySelector("#newVendorState");
-    const country = cont.querySelector("#newVendorCountry");
-    const email = cont.querySelector("#newVendorEmail");
-    const phone = cont.querySelector("#newVendorPhone");
+    const street = cont.querySelector("#newVendorStreet").value;
+    const builNo = cont.querySelector("#newVendorBuNo").value;
+    const posCo = cont.querySelector("#newVendorPoCo").value;
+    const city = cont.querySelector("#newVendorCity").value;
+    const state = cont.querySelector("#newVendorState").value;
+    const country = cont.querySelector("#newVendorCountry").value;
+    const email = cont.querySelector("#newVendorEmail").value;
+    const phone = cont.querySelector("#newVendorPhone").value;
 
+    const bo = parseInt(builNo);
 
-    fetch(`/addVendorAddress/${id}`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"street": street.value,"bNo": parseInt(builNo.value),"posCo": posCo.value,
-                            "city": city.value, "state": state.value, "country": country.value,
-                            "email": email.value, "phone": phone.value})
-    }).then(function(){
-        const add = cont.querySelector(".addAdd");
-        add.style.display = "none";
-    });
+    if(street  && bo && posCo  && city  && state  && country  && email  && phone ) {
+
+        fetch(`/addVendorAddress/${id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "street": street, "bNo": bo, "posCo": posCo,
+                "city": city, "state": state, "country": country,
+                "email": email, "phone": phone
+            })
+        });
+
+    }
 
 }
 
