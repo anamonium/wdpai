@@ -140,7 +140,7 @@ class VendorRepository extends Repository
 
         $stmt = $this->database->connect()->prepare('
             INSERT INTO public."vendors_addresses" (id_vendor, id_address, email, phone)
-            VALUES (?,?,?,?);
+            VALUES (?,?,?,?)
         ');
 
         $stmt->execute([
